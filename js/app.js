@@ -24,15 +24,31 @@ buttonEmailElemnt.addEventListener('click', function(){
 /*prendo il value dall'input*/
     const userEmail = inputEmailElement.value;
     // console.log(userEmail) ;
+    let emailFound = false;
+    for (let i = 0; i < emails.length; i++) {
+        // console.log(emails[i]);
+        if (userEmail === emails[i]) {
+            console.log('email in archivio')
+            emailFound = true;
+        } 
 
 
-
-    if (emails.includes(userEmail)) {
-        // console.log('trovata!')
-        mailSearchResult.innerHTML += `<h3 class="d-inline-block">La tua mail è stata trovata!!!</h3>`;
-    } else {
-        mailSearchResult.innerHTML += `<h3 class="d-inline-block">La tua mail NON è stata trovata!!!</h3>`;
     }
+    
+    if (emailFound === true) {
+        // console.log('trovata!')
+        mailSearchResult.innerHTML = `<h3 class="d-inline-block">La tua mail è stata trovata!!!</h3>`;
+    } else {
+        mailSearchResult.innerHTML = `<h3 class="d-inline-block">La tua mail NON è stata trovata!!!</h3>`;
+    }
+
+
+    // if (emails.includes(userEmail)) {
+    //     // console.log('trovata!')
+    //     mailSearchResult.innerHTML = `<h3 class="d-inline-block">La tua mail è stata trovata!!!</h3>`;
+    // } else {
+    //     mailSearchResult.innerHTML = `<h3 class="d-inline-block">La tua mail NON è stata trovata!!!</h3>`;
+    // }
 
 
 
@@ -48,36 +64,36 @@ let diceContainerElement = document.getElementById('dice-container');
 
 buttonDiceElement.addEventListener('click', function() {
 
-/*creare variabile per il risultato fuori dall'if*/
+    /*creare variabile per il risultato fuori dall'if*/
+    // diceContainerElement.innerHTML = ""
+    let result = "";
 
+    //creare un numero random da 1 a 6 per il player
+    const randomUserNumber = Math.floor(Math.random() * 6) + 1;
+    // console.log(randomUserNumber);
+    result += (`<h5>Player</h5>` + ' ' + randomUserNumber);
+    //creare un numero random da 1 a 6 per il computer
 
+    const randomComputerNumber = Math.floor(Math.random() * 6) + 1;
+    // console.log(randomComputerNumber);
+    result += (`<h5>Computer</h5>` + ' ' + randomComputerNumber);
 
-/*creare un numero random da 1 a 6 per il player*/
-const randomUserNumber = Math.floor(Math.random() * 6) + 1;
-// console.log(randomUserNumber);
-diceContainerElement.innerHTML += (`<h5>Player</h5>` + ' ' + randomUserNumber);
-/*creare un numero random da 1 a 6 per il computer*/
+    //verificare quale dei due numeri e' piu' grande
 
-const randomComputerNumber = Math.floor(Math.random() * 6) + 1;
-// console.log(randomComputerNumber);
-diceContainerElement.innerHTML += (`<h5>Computer</h5>` + ' ' + randomUserNumber);
+    if (randomUserNumber > randomComputerNumber) {
+        // console.log('user winner') ;
+        result += (`<h3>Player Winner!!!</h3>`);
+    } else if (randomUserNumber < randomComputerNumber) {
+        // console.log('computer winner');
+        result += (`<h3>Computer Winner!!!</h3>`);
+    } else {
+        // console.log('draw');
+        result += (`<h3>Dice are DRAW!!!</h3>`);
+    }
 
-/*verificare quale dei due numeri e' piu' grande*/
+    diceContainerElement.innerHTML = result
 
-if (randomUserNumber > randomComputerNumber) {
-    // console.log('user winner') ;
-    diceContainerElement.innerHTML += (`<h3>Player Winner!!!</h3>`);
-} else if (randomUserNumber < randomComputerNumber) {
-    // console.log('computer winner');
-    diceContainerElement.innerHTML += (`<h3>Computer Winner!!!</h3>`);
-} else {
-    // console.log('draw');
-    diceContainerElement.innerHTML += (`<h3>Dice are DRAW!!!</h3>`);
-}
-
-
-
-})
+});
 /*stampare sul dom il risultato*/
 
 
